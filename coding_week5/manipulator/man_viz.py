@@ -6,7 +6,7 @@ from typing import Callable, Dict, List, Tuple
 
 class tf_manipulator(object):
     def __init__(self):
-        self.DHparams=np.loadtxt('D:/INTRO2AI/NeuralNetworksAndDeepLearning/deepLearningFromScratch\coding_week4/manipulator/DH.txt',delimiter=',')
+        self.DHparams=np.loadtxt('./DH.txt',delimiter=',')
         print("DH-parameter:")
         print("joint:i\t a\t alpha\t d\t theta")
         self.tf=[]
@@ -73,11 +73,11 @@ class visualizer(tf_manipulator):
         self.title_window="man_viz_cv"
     def drawAxis(self):       
         
-        cv2.circle(self.displayYZ,self.originYZ,3,(0,255,0),-1)
+        cv2.circle(self.displayYZ,tuple(self.originYZ),3,(0,255,0),-1)
         cv2.line(self.displayYZ,(0,self.originYZ[1]),(self.width,self.originYZ[1]),(255,255,255),1,lineType= cv2.LINE_AA)
         cv2.line(self.displayYZ,(int(self.width/2),0),(int(self.width/2),self.height),(255,255,255),1,lineType= cv2.LINE_AA)
 
-        cv2.circle(self.displayXY,self.originXY,3,(0,255,0),-1)
+        cv2.circle(self.displayXY,tuple(self.originXY),3,(0,255,0),-1)
         cv2.line(self.displayXY,(0,self.originXY[1]),(self.width,self.originXY[1]),(255,255,255),1,lineType= cv2.LINE_AA)
         cv2.line(self.displayXY,(int(self.width/2),0),(int(self.width/2),self.height),(255,255,255),1,lineType= cv2.LINE_AA)
 
@@ -127,8 +127,8 @@ class visualizer(tf_manipulator):
             cv2.circle(self.displayXY,centerXY,radius,colors[i],-1)
             cv2.putText(self.displayXY,"(x:{0:.3f},y:{1:.3f})".format(joint_info[0][3],joint_info[1][3]),centerXY,cv2.FONT_HERSHEY_SIMPLEX,0.3,(0, 255, 0),1,cv2.LINE_AA)
             
-            cv2.line(self.displayYZ,prev_centerYZ,centerYZ,colors[i],3,lineType=cv2.LINE_AA)
-            cv2.line(self.displayXY,prev_centerXY,centerXY,colors[i],3,lineType=cv2.LINE_AA)
+            cv2.line(self.displayYZ,tuple(prev_centerYZ),tuple(centerYZ),colors[i],3,lineType=cv2.LINE_AA)
+            cv2.line(self.displayXY,tuple(prev_centerXY),tuple(centerXY),colors[i],3,lineType=cv2.LINE_AA)
 
             prev_centerYZ=centerYZ
             prev_centerXY=centerXY
